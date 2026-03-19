@@ -1,0 +1,157 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_es_aeat_mod200
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__state__calculated
+msgid "Processed"
+msgstr "Calculada"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__state__done
+msgid "Done"
+msgstr "Confirmada"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__state__posted
+msgid "Posted"
+msgstr "Contabilizada"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__state__cancelled
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__state
+msgid "State"
+msgstr "Estado"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__statement_type__n
+msgid "Normal"
+msgstr "Normal"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__statement_type__c
+msgid "Complementary"
+msgstr "Complementaria"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__statement_type__s
+msgid "Substitutive"
+msgstr "Sustitutiva"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__statement_type
+msgid "Statement Type"
+msgstr "Tipo de declaración"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__support_type__c
+msgid "DVD"
+msgstr "DVD"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields.selection,name:l10n_es_aeat_mod200.selection__l10n_es_aeat_mod200_report__support_type__t
+msgid "Telematics"
+msgstr "Telemática"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__support_type
+msgid "Support Type"
+msgstr "Tipo de soporte"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__year
+msgid "Year"
+msgstr "Ejercicio"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__period_type
+msgid "Period Type"
+msgstr "Tipo de periodo"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__date_start
+msgid "Starting date"
+msgstr "Fecha inicio"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__date_end
+msgid "Ending date"
+msgstr "Fecha fin"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__number
+msgid "Model number"
+msgstr "Número de modelo"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__company_vat
+msgid "VAT number"
+msgstr "NIF"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__contact_name
+msgid "Full Name"
+msgstr "Nombre completo"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_report__contact_phone
+msgid "Phone"
+msgstr "Teléfono"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model,name:l10n_es_aeat_mod200.model_l10n_es_aeat_mod200_report
+msgid "AEAT 200 report"
+msgstr "Declaración AEAT Modelo 200"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model,name:l10n_es_aeat_mod200.model_l10n_es_aeat_mod200_map_line
+msgid "Mapping line between PGC accounts and Model 200 fields"
+msgstr "Línea de mapeo entre cuentas PGC y campos del Modelo 200"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_map_line__field_name
+msgid "Field Name"
+msgstr "Nombre del campo"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_map_line__account_prefix
+msgid "Account Prefix"
+msgstr "Prefijo de cuenta"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_map_line__sign
+msgid "Sign"
+msgstr "Signo"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_map_line__balance_type
+msgid "Balance Type"
+msgstr "Tipo de saldo"
+
+#. module: l10n_es_aeat_mod200
+#: model:ir.model.fields,field_description:l10n_es_aeat_mod200.field_l10n_es_aeat_mod200_map_line__cumulative
+msgid "Cumulative"
+msgstr "Acumulativo"

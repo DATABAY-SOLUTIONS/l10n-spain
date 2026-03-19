@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Databay Solutions
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Tree View (inherits base AEAT tree) -->
+    <record id="l10n_es_aeat_mod200_report_tree" model="ir.ui.view">
+        <field name="name">l10n_es_aeat_mod200.report.list</field>
+        <field name="model">l10n.es.aeat.mod200.report</field>
+        <field name="inherit_id" ref="l10n_es_aeat.view_l10n_es_aeat_report_tree" />
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="string">Modelo 200 reports</attribute>
+            </list>
+            <field name="period_type" position="after">
+                <field name="resultado_liquidacion" />
+                <field name="tipo_declaracion" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Form View (inherits base AEAT form) -->
+    <record id="l10n_es_aeat_mod200_report_form" model="ir.ui.view">
+        <field name="name">l10n_es_aeat_mod200.report.form</field>
+        <field name="model">l10n.es.aeat.mod200.report</field>
+        <field name="inherit_id" ref="l10n_es_aeat.view_l10n_es_aeat_report_form" />
+        <field name="arch" type="xml">
+            <field name="previous_number" position="after">
+                <field name="tipo_declaracion" />
+            </field>
+            <group name="group_declaration" position="after">
+                <!-- Mod200 specific: Identification details -->
+                <group
+                    string="Datos del ejercicio"
+                    name="group_datos_ejercicio"
+                    colspan="4"
+                >
+                    <group>
+                        <field
+                            name="date_start_period"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="date_end_period"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="cnae_actividad"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="tipo_gravamen"
+                            readonly="state != 'draft'"
+                        />
+                    </group>
+                </group>
+                <group
+                    string="Caracteres de la declaración"
+                    name="group_caracteres"
+                    colspan="4"
+                >
+                    <group>
+                        <field
+                            name="tipo_cuentas_anuales"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="regimen_general"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="regimen_erd"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="gran_empresa"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="entidad_parcialmente_exenta"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="entidad_sin_fines_lucrativos"
+                            readonly="state != 'draft'"
+                        />
+                    </group>
+                    <group>
+                        <field
+                            name="cooperativa_protegida"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="socimi"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="regimen_naviero"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="zec"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="entidad_inactiva"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="fecha_constitucion"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="cnae_secundario"
+                            readonly="state != 'draft'"
+                        />
+                    </group>
+                </group>
+                <!-- Administrators -->
+                <group
+                    string="Administradores y representantes"
+                    name="group_admins"
+                    colspan="4"
+                >
+                    <field
+                        name="admin_ids"
+                        nolabel="1"
+                        readonly="state not in ('draft', 'calculated')"
+                    >
+                        <list editable="bottom">
+                            <field name="vat" />
+                            <field name="name" />
+                            <field name="person_type" />
+                            <field name="position_type" />
+                            <field name="appointment_date" />
+                            <field name="is_representative" />
+                        </list>
+                    </field>
+                </group>
+                <!-- Notebook with financial statements -->
+                <notebook>
+                    <!-- Balance -->
+                    <page
+                        string="Pág. 2 - Balance"
+                        name="page_balance"
+                    >
+                        <group string="Activo no corriente" colspan="4">
+                            <group>
+                                <field
+                                    name="activo_inmovilizado_intangible"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_inmovilizado_material"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_inversiones_inmobiliarias"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_inversiones_empresas_grupo_lp"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field
+                                    name="activo_inversiones_financieras_lp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_activos_impuesto_diferido"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_deudores_comerciales_nc"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="activo_no_corriente" />
+                            </group>
+                        </group>
+                        <group string="Activo corriente" colspan="4">
+                            <group>
+                                <field
+                                    name="activo_existencias"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_deudores_comerciales"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_inversiones_empresas_grupo_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field
+                                    name="activo_inversiones_financieras_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_periodificaciones_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="activo_efectivo"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="activo_corriente" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="total_activo" />
+                        </group>
+                        <separator string="Patrimonio Neto y Pasivo" />
+                        <group string="Patrimonio neto" colspan="4">
+                            <group>
+                                <field
+                                    name="pn_capital"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_prima_emision"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_reservas"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_acciones_propias"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_resultados_ejercicios_anteriores"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field
+                                    name="pn_otras_aportaciones_socios"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_resultado_ejercicio"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_dividendo_cuenta"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_ajustes_cambio_valor"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pn_subvenciones"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="patrimonio_neto" />
+                            </group>
+                        </group>
+                        <group string="Pasivo no corriente" colspan="4">
+                            <group>
+                                <field
+                                    name="pasivo_provisiones_lp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_deudas_lp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_deudas_empresas_grupo_lp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_pasivos_impuesto_diferido"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field
+                                    name="pasivo_periodificaciones_lp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_acreedores_comerciales_nc"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_deuda_carac_especiales_lp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="pasivo_no_corriente" />
+                            </group>
+                        </group>
+                        <group string="Pasivo corriente" colspan="4">
+                            <group>
+                                <field
+                                    name="pasivo_provisiones_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_deudas_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_deudas_empresas_grupo_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field
+                                    name="pasivo_acreedores_comerciales"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_periodificaciones_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pasivo_deuda_carac_especiales_cp"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="pasivo_corriente" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="total_patrimonio_neto_pasivo" />
+                        </group>
+                    </page>
+
+                    <!-- Profit & Loss -->
+                    <page
+                        string="Pág. 3-5 - Cuenta de PyG"
+                        name="page_pyg"
+                    >
+                        <group string="Resultado de explotación" colspan="4">
+                            <group>
+                                <field
+                                    name="pyg_importe_neto_cifra_negocios"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_variacion_existencias"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_trabajos_activo"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_aprovisionamientos"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_otros_ingresos_explotacion"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_gastos_personal"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_otros_gastos_explotacion"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field
+                                    name="pyg_amortizacion_inmovilizado"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_imputacion_subvenciones"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_excesos_provisiones"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_deterioro_enajenacion_inmovilizado"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_diferencia_negativa_combinaciones"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_otros_resultados"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="pyg_resultado_explotacion" />
+                            </group>
+                        </group>
+                        <group string="Resultado financiero" colspan="4">
+                            <group>
+                                <field
+                                    name="pyg_ingresos_financieros"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_gastos_financieros"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_variacion_valor_razonable"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field
+                                    name="pyg_diferencias_cambio"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_deterioro_enajenacion_if"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pyg_otros_ingresos_gastos_financieros"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="pyg_resultado_financiero" />
+                            </group>
+                        </group>
+                        <group string="Resultado del ejercicio" colspan="4">
+                            <group>
+                                <field name="pyg_resultado_antes_impuestos" />
+                                <field
+                                    name="pyg_impuesto_beneficios"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="pyg_resultado_ejercicio" />
+                            </group>
+                            <group>
+                                <field
+                                    name="pyg_resultado_ops_interrumpidas"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="pyg_resultado_ejercicio_total" />
+                            </group>
+                        </group>
+                    </page>
+
+                    <!-- ECPN -->
+                    <page
+                        string="Pág. 6-8 - ECPN"
+                        name="page_ecpn"
+                    >
+                        <group
+                            string="Estado de Cambios en el Patrimonio Neto"
+                            colspan="4"
+                        >
+                            <group>
+                                <field
+                                    name="ecpn_resultado_pyg"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="ecpn_ingresos_gastos_pn"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="ecpn_transferencias_pyg"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="ecpn_total_ingresos_gastos" />
+                            </group>
+                            <group>
+                                <field
+                                    name="ecpn_pn_inicio"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="ecpn_ajustes"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="ecpn_pn_inicio_ajustado" />
+                                <field
+                                    name="ecpn_variaciones_pn"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="ecpn_pn_final" />
+                            </group>
+                        </group>
+                    </page>
+
+                    <!-- EFE -->
+                    <page
+                        string="Pág. 9 - EFE"
+                        name="page_efe"
+                    >
+                        <group
+                            string="Estado de Flujos de Efectivo"
+                            colspan="4"
+                        >
+                            <group>
+                                <field
+                                    name="efe_flujos_explotacion"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="efe_flujos_inversion"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="efe_flujos_financiacion"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="efe_efecto_tipo_cambio"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field name="efe_aumento_disminucion_efectivo" />
+                                <field
+                                    name="efe_efectivo_inicio"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="efe_efectivo_final" />
+                            </group>
+                        </group>
+                    </page>
+
+                    <!-- Corrections -->
+                    <page
+                        string="Pág. 12-13 - Correcciones"
+                        name="page_correcciones"
+                    >
+                        <group string="Correcciones al resultado contable" colspan="4">
+                            <group string="Aumentos">
+                                <field name="corr_amortizaciones_aumento" readonly="state != 'calculated'" />
+                                <field name="corr_deterioros_aumento" readonly="state != 'calculated'" />
+                                <field name="corr_provisiones_aumento" readonly="state != 'calculated'" />
+                                <field name="corr_operaciones_vinculadas_aumento" readonly="state != 'calculated'" />
+                                <field name="corr_subvenciones_aumento" readonly="state != 'calculated'" />
+                                <field name="corr_gastos_no_deducibles_aumento" readonly="state != 'calculated'" />
+                                <field name="corr_otras_correcciones_aumento" readonly="state != 'calculated'" />
+                                <field name="correcciones_aumentos" />
+                            </group>
+                            <group string="Disminuciones">
+                                <field name="corr_amortizaciones_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_deterioros_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_provisiones_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_operaciones_vinculadas_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_subvenciones_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_libertad_amortizacion_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_reserva_capitalizacion_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_reserva_nivelacion_disminucion" readonly="state != 'calculated'" />
+                                <field name="corr_otras_correcciones_disminucion" readonly="state != 'calculated'" />
+                                <field name="correcciones_disminuciones" />
+                            </group>
+                        </group>
+                    </page>
+
+                    <!-- Liquidation -->
+                    <page
+                        string="Pág. 14 - Liquidación"
+                        name="page_liquidacion"
+                    >
+                        <group string="Base imponible" colspan="4">
+                            <group>
+                                <field name="resultado_contable" readonly="1" />
+                                <field name="correcciones_aumentos" />
+                                <field name="correcciones_disminuciones" />
+                                <field name="base_imponible_previa" />
+                            </group>
+                            <group>
+                                <field
+                                    name="compensacion_bins"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="base_imponible" />
+                            </group>
+                        </group>
+                        <group string="Cuota" colspan="4">
+                            <group>
+                                <field name="cuota_integra" />
+                                <field name="deducciones_doble_imposicion" />
+                                <field name="bonificaciones" />
+                                <field name="cuota_integra_ajustada" />
+                            </group>
+                            <group>
+                                <field name="deducciones_inversiones" />
+                                <field name="cuota_liquida" />
+                            </group>
+                        </group>
+                        <group string="Resultado" colspan="4">
+                            <group>
+                                <field
+                                    name="retenciones_ingresos_cuenta"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="pagos_fraccionados"
+                                    readonly="state != 'calculated'"
+                                />
+                            </group>
+                            <group>
+                                <field name="cuota_diferencial" />
+                                <field name="resultado_liquidacion" />
+                            </group>
+                        </group>
+                    </page>
+
+                    <!-- Deducciones y bonificaciones detail -->
+                    <page
+                        string="Deducciones y Bonificaciones"
+                        name="page_deducciones"
+                    >
+                        <group string="Deducciones por doble imposición" colspan="4">
+                            <group>
+                                <field name="deduc_doble_imp_internacional" readonly="state != 'calculated'" />
+                                <field name="deduc_doble_imp_interna" readonly="state != 'calculated'" />
+                                <field name="deducciones_doble_imposicion" />
+                            </group>
+                        </group>
+                        <group string="Bonificaciones" colspan="4">
+                            <group>
+                                <field name="bonif_rentas_ceuta_melilla" readonly="state != 'calculated'" />
+                                <field name="bonif_cooperativas" readonly="state != 'calculated'" />
+                                <field name="bonif_otras" readonly="state != 'calculated'" />
+                                <field name="bonificaciones" />
+                            </group>
+                        </group>
+                        <group string="Deducciones por inversiones" colspan="4">
+                            <group>
+                                <field name="deduc_idi" readonly="state != 'calculated'" />
+                                <field name="deduc_producciones_cinematograficas" readonly="state != 'calculated'" />
+                                <field name="deduc_creacion_empleo" readonly="state != 'calculated'" />
+                            </group>
+                            <group>
+                                <field name="deduc_creacion_empleo_discapacidad" readonly="state != 'calculated'" />
+                                <field name="deduc_donativos" readonly="state != 'calculated'" />
+                                <field name="deduc_otras_inversiones" readonly="state != 'calculated'" />
+                                <field name="deducciones_inversiones" />
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </group>
+            <form position="inside">
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_l10n_es_aeat_mod200_report" model="ir.actions.act_window">
+        <field name="name">Modelo 200</field>
+        <field name="res_model">l10n.es.aeat.mod200.report</field>
+        <field name="view_mode">list,form</field>
+        <field name="help">Crear y consultar declaraciones del Modelo 200 - Impuesto sobre Sociedades.</field>
+    </record>
+    <record
+        model="ir.actions.act_window.view"
+        id="action_l10n_es_aeat_mod200_report_tree"
+    >
+        <field name="sequence" eval="2" />
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="l10n_es_aeat_mod200_report_tree" />
+        <field name="act_window_id" ref="action_l10n_es_aeat_mod200_report" />
+    </record>
+    <record
+        model="ir.actions.act_window.view"
+        id="action_l10n_es_aeat_mod200_report_form"
+    >
+        <field name="sequence" eval="3" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="l10n_es_aeat_mod200_report_form" />
+        <field name="act_window_id" ref="action_l10n_es_aeat_mod200_report" />
+    </record>
+
+    <!-- Menu -->
+    <menuitem
+        id="menu_aeat_mod200_report"
+        parent="l10n_es_aeat.menu_l10n_es_aeat_submenu"
+        action="action_l10n_es_aeat_mod200_report"
+        sequence="200"
+        name="Modelo 200"
+    />
+</odoo>

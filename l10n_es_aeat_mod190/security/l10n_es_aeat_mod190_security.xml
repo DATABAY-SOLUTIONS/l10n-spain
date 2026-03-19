@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="res.groups.privilege" id="res_groups_privilege_aeat_mod190">
+        <field name="name">AEAT Model 190 Permissions</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="sequence">9</field>
+    </record>
+    <record id="group_aeat_mod190" model="res.groups">
+        <field name="name">AEAT Model 190 (with access to sensitive data)</field>
+        <field name="privilege_id" ref="res_groups_privilege_aeat_mod190" />
+        <field
+            name="user_ids"
+            eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"
+        />
+        <field
+            name="implied_ids"
+            eval="[Command.link(ref('l10n_es_aeat.group_account_aeat'))]"
+        />
+    </record>
+    <record id="aeat_190_company_rule" model="ir.rule">
+        <field name="name">AEAT 190 multi-company</field>
+        <field name="model_id" ref="model_l10n_es_aeat_mod190_report" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+</odoo>

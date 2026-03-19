@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 OCA - Odoo Community Association
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+     Subconfig Page 02: B1/B2 detail, result, additional info, complementary, IBAN.
+     Based on DR202e25.xlsx sheet "dr M202 (2)" -->
+<odoo>
+    <record id="aeat_mod202_sub02_export_config" model="aeat.model.export.config">
+        <field name="name">Mod. 202 2025 - Página 02</field>
+        <field name="model_number">202</field>
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Header -->
+    <record id="aeat_mod202_s02_line_01" model="aeat.model.export.config.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Inicio identificador</field>
+        <field name="fixed_value">&lt;T</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_02" model="aeat.model.export.config.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Modelo</field>
+        <field name="fixed_value">202</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_03" model="aeat.model.export.config.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Página</field>
+        <field name="fixed_value">02</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_04" model="aeat.model.export.config.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Fin identificador</field>
+        <field name="fixed_value">000&gt;</field>
+        <field name="export_type">string</field>
+        <field name="size">4</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_05" model="aeat.model.export.config.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Reservado Administración</field>
+        <field name="fixed_value" />
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- B1 - Single percentage -->
+    <record id="aeat_mod202_s02_line_06" model="aeat.model.export.config.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B1 Base pago fraccionado</field>
+        <field name="expression">${object.casilla_17_base if object.liquidacion_modalidad == 'B' and not object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_07" model="aeat.model.export.config.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B1 Porcentaje</field>
+        <field name="expression">${object.casilla_17_pct if object.liquidacion_modalidad == 'B' and not object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_08" model="aeat.model.export.config.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B1 Dotaciones art. 11.12</field>
+        <field name="expression">${object.casilla_18 if object.liquidacion_modalidad == 'B' and not object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_09" model="aeat.model.export.config.line">
+        <field name="sequence">9</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B1 Compensación cuotas negativas coop.</field>
+        <field name="expression">${object.casilla_19_comp if object.liquidacion_modalidad == 'B' and not object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_10" model="aeat.model.export.config.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B1 Reserva nivelación - minoración</field>
+        <field name="expression">${object.casilla_41 if object.liquidacion_modalidad == 'B' and not object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_11" model="aeat.model.export.config.line">
+        <field name="sequence">11</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B1 Reserva nivelación - adición</field>
+        <field name="expression">${object.casilla_42 if object.liquidacion_modalidad == 'B' and not object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_12" model="aeat.model.export.config.line">
+        <field name="sequence">12</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[20] Resultado previo</field>
+        <field name="expression">${object.casilla_20 if object.liquidacion_modalidad == 'B' and not object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <!-- B2 - Multiple percentages (4 tranches) -->
+    <record id="aeat_mod202_s02_line_13" model="aeat.model.export.config.line">
+        <field name="sequence">13</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T1 Base</field>
+        <field name="expression">${object.b2_tramo1_base if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_14" model="aeat.model.export.config.line">
+        <field name="sequence">14</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T1 Resultado parcial</field>
+        <field name="expression">${object.b2_tramo1_resultado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_15" model="aeat.model.export.config.line">
+        <field name="sequence">15</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T1 Porcentaje</field>
+        <field name="expression">${object.b2_tramo1_pct if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_16" model="aeat.model.export.config.line">
+        <field name="sequence">16</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T1 Resultado acumulado</field>
+        <field name="expression">${object.b2_tramo1_acumulado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_17" model="aeat.model.export.config.line">
+        <field name="sequence">17</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T2 Base</field>
+        <field name="expression">${object.b2_tramo2_base if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_18" model="aeat.model.export.config.line">
+        <field name="sequence">18</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T2 Resultado parcial</field>
+        <field name="expression">${object.b2_tramo2_resultado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_19" model="aeat.model.export.config.line">
+        <field name="sequence">19</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T2 Porcentaje</field>
+        <field name="expression">${object.b2_tramo2_pct if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_20" model="aeat.model.export.config.line">
+        <field name="sequence">20</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T2 Resultado acumulado</field>
+        <field name="expression">${object.b2_tramo2_acumulado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_21" model="aeat.model.export.config.line">
+        <field name="sequence">21</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T3 Base</field>
+        <field name="expression">${object.b2_tramo3_base if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_22" model="aeat.model.export.config.line">
+        <field name="sequence">22</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T3 Resultado parcial</field>
+        <field name="expression">${object.b2_tramo3_resultado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_23" model="aeat.model.export.config.line">
+        <field name="sequence">23</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T3 Porcentaje</field>
+        <field name="expression">${object.b2_tramo3_pct if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_24" model="aeat.model.export.config.line">
+        <field name="sequence">24</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T3 Resultado acumulado</field>
+        <field name="expression">${object.b2_tramo3_acumulado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_25" model="aeat.model.export.config.line">
+        <field name="sequence">25</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T4 Base</field>
+        <field name="expression">${object.b2_tramo4_base if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_26" model="aeat.model.export.config.line">
+        <field name="sequence">26</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T4 Resultado parcial</field>
+        <field name="expression">${object.b2_tramo4_resultado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_27" model="aeat.model.export.config.line">
+        <field name="sequence">27</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T4 Porcentaje</field>
+        <field name="expression">${object.b2_tramo4_pct if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_28" model="aeat.model.export.config.line">
+        <field name="sequence">28</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 T4 Resultado acumulado</field>
+        <field name="expression">${object.b2_tramo4_acumulado if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_29" model="aeat.model.export.config.line">
+        <field name="sequence">29</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 Dotaciones art. 11.12</field>
+        <field name="expression">${object.b2_dotaciones if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_30" model="aeat.model.export.config.line">
+        <field name="sequence">30</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 Compensación cuotas neg. coop.</field>
+        <field name="expression">${object.b2_compensacion if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_31" model="aeat.model.export.config.line">
+        <field name="sequence">31</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 Reserva nivelación - minoración</field>
+        <field name="expression">${object.b2_nivelacion_min if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_32" model="aeat.model.export.config.line">
+        <field name="sequence">32</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 Reserva nivelación - adición</field>
+        <field name="expression">${object.b2_nivelacion_add if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_33" model="aeat.model.export.config.line">
+        <field name="sequence">33</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">B2 Resultado previo</field>
+        <field name="expression">${object.b2_resultado_previo if object.liquidacion_modalidad == 'B' and object.use_b2 else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <!-- Common B result fields -->
+    <record id="aeat_mod202_s02_line_34" model="aeat.model.export.config.line">
+        <field name="sequence">34</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[27] Bonificaciones</field>
+        <field name="expression">${object.casilla_27 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_35" model="aeat.model.export.config.line">
+        <field name="sequence">35</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[28] Retenciones e ingresos a cuenta</field>
+        <field name="expression">${object.casilla_28 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_36" model="aeat.model.export.config.line">
+        <field name="sequence">36</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[29] Vol. operaciones Territorio Común (%)</field>
+        <field name="expression">${object.casilla_29_pct if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_37" model="aeat.model.export.config.line">
+        <field name="sequence">37</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[30] Pagos fraccionados anteriores</field>
+        <field name="expression">${object.casilla_30 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_38" model="aeat.model.export.config.line">
+        <field name="sequence">38</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[31] Resultado declaración anterior</field>
+        <field name="expression">${object.casilla_31 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_39" model="aeat.model.export.config.line">
+        <field name="sequence">39</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[32] Resultado</field>
+        <field name="expression">${object.casilla_32 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_40" model="aeat.model.export.config.line">
+        <field name="sequence">40</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[33] Mínimo a ingresar</field>
+        <field name="expression">${object.casilla_33 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_41" model="aeat.model.export.config.line">
+        <field name="sequence">41</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">[34] Cantidad a ingresar</field>
+        <field name="expression">${object.casilla_34 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <!-- Additional information -->
+    <record id="aeat_mod202_s02_line_42" model="aeat.model.export.config.line">
+        <field name="sequence">42</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Comunicar datos adicionales</field>
+        <field name="expression">${'X' if object.comunicar_datos_adicionales else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_43" model="aeat.model.export.config.line">
+        <field name="sequence">43</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">NRS</field>
+        <field name="expression">${object.nrs or ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">22</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_44" model="aeat.model.export.config.line">
+        <field name="sequence">44</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Info quita/espera</field>
+        <field name="expression">${object.info_quita_espera}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_45" model="aeat.model.export.config.line">
+        <field name="sequence">45</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Info quita/espera BI</field>
+        <field name="expression">${object.info_quita_espera_bi}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_46" model="aeat.model.export.config.line">
+        <field name="sequence">46</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Info quita/espera cuota</field>
+        <field name="expression">${object.info_quita_espera_cuota}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_47" model="aeat.model.export.config.line">
+        <field name="sequence">47</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Rentas reversión deterioros</field>
+        <field name="expression">${object.info_reversion_deterioros}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_48" model="aeat.model.export.config.line">
+        <field name="sequence">48</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">RIC</field>
+        <field name="expression">${object.info_ric}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_49" model="aeat.model.export.config.line">
+        <field name="sequence">49</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Bonificación art. 26 Ley 19/1994</field>
+        <field name="expression">${object.info_bonif_art26}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_50" model="aeat.model.export.config.line">
+        <field name="sequence">50</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Régimen fiscal ZEC</field>
+        <field name="expression">${object.info_zec}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_51" model="aeat.model.export.config.line">
+        <field name="sequence">51</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Minoración rentas Ceuta/Melilla</field>
+        <field name="expression">${object.info_ceuta_melilla}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_52" model="aeat.model.export.config.line">
+        <field name="sequence">52</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Importe excluido aumento capital</field>
+        <field name="expression">${object.info_aumento_capital}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_53" model="aeat.model.export.config.line">
+        <field name="sequence">53</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Renta exenta Ley 49/2002</field>
+        <field name="expression">${object.info_renta_exenta_49_2002}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s02_line_54" model="aeat.model.export.config.line">
+        <field name="sequence">54</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Bonificación art. 34 LIS</field>
+        <field name="expression">${object.info_bonif_art34}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <!-- Complementary declaration -->
+    <record id="aeat_mod202_s02_line_55" model="aeat.model.export.config.line">
+        <field name="sequence">55</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Declaración complementaria</field>
+        <field name="expression">${'X' if object.statement_type == 'C' else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_56" model="aeat.model.export.config.line">
+        <field name="sequence">56</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Nº justificante declaración anterior</field>
+        <field name="expression">${object.previous_number if object.statement_type == 'C' else ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">13</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- IBAN -->
+    <record id="aeat_mod202_s02_line_57" model="aeat.model.export.config.line">
+        <field name="sequence">57</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Domiciliación IBAN</field>
+        <field name="expression">${object.partner_bank_id and object.partner_bank_id.acc_number and object.partner_bank_id.acc_number.replace(" ", "") or ""}</field>
+        <field name="export_type">string</field>
+        <field name="size">34</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- Reserved + seal + end -->
+    <record id="aeat_mod202_s02_line_58" model="aeat.model.export.config.line">
+        <field name="sequence">58</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Reservado Administración</field>
+        <field name="fixed_value" />
+        <field name="export_type">string</field>
+        <field name="size">116</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_59" model="aeat.model.export.config.line">
+        <field name="sequence">59</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Sello electrónico AEAT</field>
+        <field name="fixed_value" />
+        <field name="export_type">string</field>
+        <field name="size">13</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s02_line_60" model="aeat.model.export.config.line">
+        <field name="sequence">60</field>
+        <field name="export_config_id" ref="aeat_mod202_sub02_export_config" />
+        <field name="name">Indicador fin de registro</field>
+        <field name="fixed_value">&lt;/T20202000&gt;</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+</odoo>

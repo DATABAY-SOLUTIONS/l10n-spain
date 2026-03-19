@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 OCA - Odoo Community Association
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_l10n_es_aeat_mod202_report_tree" model="ir.ui.view">
+        <field name="name">l10n_es.aeat.mod202.report.list</field>
+        <field name="model">l10n.es.aeat.mod202.report</field>
+        <field name="inherit_id" ref="l10n_es_aeat.view_l10n_es_aeat_report_tree" />
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="string">AEAT 202 reports</attribute>
+            </list>
+            <field name="period_type" position="after">
+                <field name="liquidacion_modalidad" />
+                <field name="tipo_declaracion" />
+            </field>
+        </field>
+    </record>
+    <record id="view_l10n_es_aeat_mod202_report_form" model="ir.ui.view">
+        <field name="name">l10n_es.aeat.mod202.report.form</field>
+        <field name="model">l10n.es.aeat.mod202.report</field>
+        <field name="inherit_id" ref="l10n_es_aeat.view_l10n_es_aeat_report_form" />
+        <field name="arch" type="xml">
+            <field name="previous_number" position="after">
+                <field name="tipo_declaracion" readonly="state != 'calculated'" />
+            </field>
+            <group name="group_declaration" position="after">
+                <!-- Configuration -->
+                <group
+                    string="Datos adicionales"
+                    name="group_datos_adicionales"
+                    colspan="4"
+                >
+                    <group>
+                        <field
+                            name="liquidacion_modalidad"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="date_start_period"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="cnae_actividad"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="tipo_gravamen"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="cn_tramo"
+                            readonly="state != 'draft'"
+                        />
+                    </group>
+                    <group>
+                        <field
+                            name="contribuyente_navarra"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="aplica_ley_49_2002"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="aplica_ley_11_2009"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="aplica_capital_riesgo"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="aplica_regimen_naviero"
+                            readonly="state != 'draft'"
+                        />
+                        <field name="aplica_erd" readonly="state != 'draft'" />
+                        <field
+                            name="cn_superior_6m"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="cooperativa_protegida"
+                            readonly="state != 'draft'"
+                        />
+                        <field name="aplica_da_14" readonly="state != 'draft'" />
+                        <field
+                            name="cn_superior_10m"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="otras_entidades_multitipo"
+                            readonly="state != 'draft'"
+                        />
+                    </group>
+                </group>
+                <!-- Modalidad A -->
+                <group
+                    string="Liquidación - Modalidad A (Art. 40.2 LIS)"
+                    name="group_modalidad_a"
+                    invisible="liquidacion_modalidad != 'A' or state == 'draft'"
+                    colspan="4"
+                >
+                    <group>
+                        <field
+                            name="casilla_01_mode"
+                            readonly="state != 'draft'"
+                        />
+                        <field
+                            name="casilla_01"
+                            readonly="state != 'calculated' or casilla_01_mode == 'auto'"
+                        />
+                        <field
+                            name="casilla_02"
+                            readonly="state != 'calculated'"
+                        />
+                        <field name="casilla_03" />
+                    </group>
+                </group>
+                <!-- Modalidad B -->
+                <group
+                    string="Liquidación - Modalidad B (Art. 40.3 LIS)"
+                    name="group_modalidad_b"
+                    invisible="liquidacion_modalidad != 'B' or state == 'draft'"
+                    colspan="4"
+                >
+                    <group string="Correcciones al resultado contable" colspan="4">
+                        <group>
+                            <field
+                                name="casilla_04"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_05"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_06"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_07"
+                                readonly="state != 'calculated'"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="casilla_37"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_08"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_09"
+                                readonly="state != 'calculated'"
+                            />
+                            <field name="casilla_38" />
+                            <field name="casilla_39" />
+                        </group>
+                    </group>
+                    <group string="Base imponible" colspan="4">
+                        <group>
+                            <field name="casilla_13" />
+                            <field
+                                name="casilla_40"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_14"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_15"
+                                readonly="state != 'calculated'"
+                                invisible="not aplica_erd"
+                            />
+                            <field
+                                name="casilla_16"
+                                readonly="state != 'calculated'"
+                                invisible="not aplica_erd"
+                            />
+                        </group>
+                    </group>
+                    <group
+                        string="B1 - Caso general (porcentaje único)"
+                        colspan="4"
+                        invisible="use_b2"
+                    >
+                        <group>
+                            <field name="casilla_17_base" />
+                            <field
+                                name="casilla_17_pct"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_18"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_19_comp"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_41"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_42"
+                                readonly="state != 'calculated'"
+                            />
+                            <field name="casilla_20" />
+                        </group>
+                    </group>
+                    <group
+                        string="B2 - Casos específicos (múltiples porcentajes)"
+                        colspan="4"
+                    >
+                        <group>
+                            <field
+                                name="use_b2"
+                                readonly="state != 'calculated'"
+                            />
+                        </group>
+                        <group invisible="not use_b2" colspan="4">
+                            <group string="Tramo 1">
+                                <field
+                                    name="b2_tramo1_base"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="b2_tramo1_pct"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="b2_tramo1_resultado" />
+                                <field name="b2_tramo1_acumulado" />
+                            </group>
+                            <group string="Tramo 2">
+                                <field
+                                    name="b2_tramo2_base"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="b2_tramo2_pct"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="b2_tramo2_resultado" />
+                                <field name="b2_tramo2_acumulado" />
+                            </group>
+                            <group string="Tramo 3">
+                                <field
+                                    name="b2_tramo3_base"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="b2_tramo3_pct"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="b2_tramo3_resultado" />
+                                <field name="b2_tramo3_acumulado" />
+                            </group>
+                            <group string="Tramo 4">
+                                <field
+                                    name="b2_tramo4_base"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="b2_tramo4_pct"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="b2_tramo4_resultado" />
+                                <field name="b2_tramo4_acumulado" />
+                            </group>
+                            <group string="Dotaciones y compensaciones">
+                                <field
+                                    name="b2_dotaciones"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="b2_compensacion"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="b2_nivelacion_min"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field
+                                    name="b2_nivelacion_add"
+                                    readonly="state != 'calculated'"
+                                />
+                                <field name="b2_resultado_previo" />
+                            </group>
+                        </group>
+                    </group>
+                    <group string="Resultado" colspan="4">
+                        <group>
+                            <field
+                                name="casilla_27"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_28"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_29_pct"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_30"
+                                readonly="state != 'calculated'"
+                            />
+                            <field
+                                name="casilla_31"
+                                readonly="state != 'calculated'"
+                            />
+                            <field name="casilla_32" />
+                            <field
+                                name="casilla_33"
+                                readonly="state != 'calculated'"
+                                invisible="cn_tramo == '0'"
+                            />
+                            <field name="casilla_34" />
+                        </group>
+                    </group>
+                </group>
+                <!-- Additional information -->
+                <group
+                    string="Información adicional"
+                    name="group_info_adicional"
+                    invisible="state == 'draft'"
+                    colspan="4"
+                >
+                    <group>
+                        <field
+                            name="comunicar_datos_adicionales"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="nrs"
+                            readonly="state != 'calculated'"
+                        />
+                    </group>
+                    <group>
+                        <field
+                            name="info_quita_espera"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_quita_espera_bi"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_quita_espera_cuota"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_reversion_deterioros"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_ric"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_bonif_art26"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_zec"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_ceuta_melilla"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_aumento_capital"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_renta_exenta_49_2002"
+                            readonly="state != 'calculated'"
+                        />
+                        <field
+                            name="info_bonif_art34"
+                            readonly="state != 'calculated'"
+                        />
+                    </group>
+                </group>
+            </group>
+            <form position="inside">
+                <chatter />
+            </form>
+        </field>
+    </record>
+    <record id="action_l10n_es_aeat_mod202_report" model="ir.actions.act_window">
+        <field name="name">AEAT modelo 202</field>
+        <field name="res_model">l10n.es.aeat.mod202.report</field>
+        <field name="view_mode">form,list</field>
+        <field name="help">Crear y consultar declaraciones del Modelo 202.</field>
+    </record>
+    <record
+        model="ir.actions.act_window.view"
+        id="action_l10n_es_aeat_mod202_report_tree"
+    >
+        <field name="sequence" eval="2" />
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_l10n_es_aeat_mod202_report_tree" />
+        <field name="act_window_id" ref="action_l10n_es_aeat_mod202_report" />
+    </record>
+    <record
+        model="ir.actions.act_window.view"
+        id="action_l10n_es_aeat_mod202_report_form"
+    >
+        <field name="sequence" eval="3" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_l10n_es_aeat_mod202_report_form" />
+        <field name="act_window_id" ref="action_l10n_es_aeat_mod202_report" />
+    </record>
+    <menuitem
+        id="menu_aeat_mod202_report"
+        parent="l10n_es_aeat.menu_l10n_es_aeat_submenu"
+        action="action_l10n_es_aeat_mod202_report"
+        sequence="202"
+        name="Modelo 202"
+    />
+</odoo>

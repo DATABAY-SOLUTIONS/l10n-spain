@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2025 OCA - Odoo Community Association
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+     Subconfig Page 01: Identification + Additional data + Modality A + Modality B (part 1).
+     Based on DR202e25.xlsx sheet "dr M202 (1)" -->
+<odoo>
+    <record id="aeat_mod202_sub01_export_config" model="aeat.model.export.config">
+        <field name="name">Mod. 202 2025 - Página 01</field>
+        <field name="model_number">202</field>
+        <field name="active" eval="False" />
+    </record>
+
+    <!-- Header -->
+    <record id="aeat_mod202_s01_line_01" model="aeat.model.export.config.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Inicio identificador</field>
+        <field name="fixed_value">&lt;T</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_02" model="aeat.model.export.config.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Modelo</field>
+        <field name="fixed_value">202</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_03" model="aeat.model.export.config.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Página</field>
+        <field name="fixed_value">01</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_04" model="aeat.model.export.config.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Fin identificador</field>
+        <field name="fixed_value">000&gt;</field>
+        <field name="export_type">string</field>
+        <field name="size">4</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_05" model="aeat.model.export.config.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Reservado Administración</field>
+        <field name="fixed_value" />
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- Identification -->
+    <record id="aeat_mod202_s01_line_06" model="aeat.model.export.config.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Tipo de declaración</field>
+        <field name="expression">${object.tipo_declaracion}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_07" model="aeat.model.export.config.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">NIF</field>
+        <field name="expression">${object.company_vat}</field>
+        <field name="export_type">string</field>
+        <field name="size">9</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_08" model="aeat.model.export.config.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Denominación o apellidos</field>
+        <field name="expression">${object.company_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">60</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_09" model="aeat.model.export.config.line">
+        <field name="sequence">9</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Nombre</field>
+        <field name="expression">${''}</field>
+        <field name="export_type">string</field>
+        <field name="size">20</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_10" model="aeat.model.export.config.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Contribuyente normativa foral Navarra</field>
+        <field name="expression">${'X' if object.contribuyente_navarra else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- Devengo -->
+    <record id="aeat_mod202_s01_line_11" model="aeat.model.export.config.line">
+        <field name="sequence">11</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Ejercicio</field>
+        <field name="expression">${object.year}</field>
+        <field name="export_type">string</field>
+        <field name="size">4</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_12" model="aeat.model.export.config.line">
+        <field name="sequence">12</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Periodo</field>
+        <field name="expression">${object.period_type}</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_13" model="aeat.model.export.config.line">
+        <field name="sequence">13</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Fecha inicio período impositivo</field>
+        <field name="expression">${object.date_start_period and object.date_start_period.strftime('%d%m%Y') or '01012025'}</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_14" model="aeat.model.export.config.line">
+        <field name="sequence">14</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">CNAE actividad principal</field>
+        <field name="expression">${object.cnae_actividad or ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">4</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- Additional data (boolean flags) -->
+    <record id="aeat_mod202_s01_line_15" model="aeat.model.export.config.line">
+        <field name="sequence">15</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Ley 49/2002</field>
+        <field name="expression">${'X' if object.aplica_ley_49_2002 else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_16" model="aeat.model.export.config.line">
+        <field name="sequence">16</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Ley 11/2009 SOCIMI</field>
+        <field name="expression">${'X' if object.aplica_ley_11_2009 else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_17" model="aeat.model.export.config.line">
+        <field name="sequence">17</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Capital-riesgo</field>
+        <field name="expression">${'X' if object.aplica_capital_riesgo else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_18" model="aeat.model.export.config.line">
+        <field name="sequence">18</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Régimen naviero</field>
+        <field name="expression">${'X' if object.aplica_regimen_naviero else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_19" model="aeat.model.export.config.line">
+        <field name="sequence">19</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">ERD</field>
+        <field name="expression">${'X' if object.aplica_erd else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_20" model="aeat.model.export.config.line">
+        <field name="sequence">20</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">CN >= 6M EUR</field>
+        <field name="expression">${'X' if object.cn_superior_6m else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_21" model="aeat.model.export.config.line">
+        <field name="sequence">21</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Cooperativa protegida</field>
+        <field name="expression">${'X' if object.cooperativa_protegida else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_22" model="aeat.model.export.config.line">
+        <field name="sequence">22</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">DA 14ª LIS</field>
+        <field name="expression">${'X' if object.aplica_da_14 else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_23" model="aeat.model.export.config.line">
+        <field name="sequence">23</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">CN >= 10M EUR</field>
+        <field name="expression">${'X' if object.cn_superior_10m else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_24" model="aeat.model.export.config.line">
+        <field name="sequence">24</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Otras entidades multitipo</field>
+        <field name="expression">${'X' if object.otras_entidades_multitipo else ' '}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_25" model="aeat.model.export.config.line">
+        <field name="sequence">25</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Tipo de gravamen</field>
+        <field name="expression">${object.tipo_gravamen or ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_26" model="aeat.model.export.config.line">
+        <field name="sequence">26</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Tramo CN</field>
+        <field name="expression">${object.cn_tramo or '0'}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- Modality A/B -->
+    <record id="aeat_mod202_s01_line_27" model="aeat.model.export.config.line">
+        <field name="sequence">27</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Liquidación modalidad A ó B</field>
+        <field name="expression">${object.liquidacion_modalidad}</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!-- Modality A casillas -->
+    <record id="aeat_mod202_s01_line_28" model="aeat.model.export.config.line">
+        <field name="sequence">28</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[01] Base del pago fraccionado</field>
+        <field name="expression">${object.casilla_01 if object.liquidacion_modalidad == 'A' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_29" model="aeat.model.export.config.line">
+        <field name="sequence">29</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[02] Resultado declaración anterior</field>
+        <field name="expression">${object.casilla_02 if object.liquidacion_modalidad == 'A' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_30" model="aeat.model.export.config.line">
+        <field name="sequence">30</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[03] A ingresar</field>
+        <field name="expression">${object.casilla_03 if object.liquidacion_modalidad == 'A' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <!-- Modality B casillas (page 01 part) -->
+    <record id="aeat_mod202_s01_line_31" model="aeat.model.export.config.line">
+        <field name="sequence">31</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[04] Resultado contable después de IS e IC</field>
+        <field name="expression">${object.casilla_04 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_32" model="aeat.model.export.config.line">
+        <field name="sequence">32</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[05] Correcciones IS/IC - Aumentos</field>
+        <field name="expression">${object.casilla_05 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_33" model="aeat.model.export.config.line">
+        <field name="sequence">33</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[06] Correcciones IS/IC - Disminuciones</field>
+        <field name="expression">${object.casilla_06 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_34" model="aeat.model.export.config.line">
+        <field name="sequence">34</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[07] Correcciones IS/IC complementario</field>
+        <field name="expression">${object.casilla_07 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_35" model="aeat.model.export.config.line">
+        <field name="sequence">35</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[37] 30% gastos amortización - Disminuciones</field>
+        <field name="expression">${object.casilla_37 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_36" model="aeat.model.export.config.line">
+        <field name="sequence">36</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[08] Resto correcciones - Aumentos</field>
+        <field name="expression">${object.casilla_08 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_37" model="aeat.model.export.config.line">
+        <field name="sequence">37</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[09] Resto correcciones - Disminuciones</field>
+        <field name="expression">${object.casilla_09 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_38" model="aeat.model.export.config.line">
+        <field name="sequence">38</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[38] Total correcciones - Aumentos</field>
+        <field name="expression">${object.casilla_38 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_39" model="aeat.model.export.config.line">
+        <field name="sequence">39</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[39] Total correcciones - Disminuciones</field>
+        <field name="expression">${object.casilla_39 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_40" model="aeat.model.export.config.line">
+        <field name="sequence">40</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[13] Base imponible previa</field>
+        <field name="expression">${object.casilla_13 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="apply_sign" eval="True" />
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_41" model="aeat.model.export.config.line">
+        <field name="sequence">41</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[40] Remanente reserva capitalización</field>
+        <field name="expression">${object.casilla_40 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_42" model="aeat.model.export.config.line">
+        <field name="sequence">42</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[14] Compensación BINs</field>
+        <field name="expression">${object.casilla_14 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_43" model="aeat.model.export.config.line">
+        <field name="sequence">43</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[15] Reserva nivelación - Disminución</field>
+        <field name="expression">${object.casilla_15 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+    <record id="aeat_mod202_s01_line_44" model="aeat.model.export.config.line">
+        <field name="sequence">44</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">[16] Reserva nivelación - Adición</field>
+        <field name="expression">${object.casilla_16 if object.liquidacion_modalidad == 'B' else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">17</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <!-- Reserved + end of page -->
+    <record id="aeat_mod202_s01_line_45" model="aeat.model.export.config.line">
+        <field name="sequence">45</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Reservado Administración</field>
+        <field name="fixed_value" />
+        <field name="export_type">string</field>
+        <field name="size">251</field>
+        <field name="alignment">left</field>
+    </record>
+    <record id="aeat_mod202_s01_line_46" model="aeat.model.export.config.line">
+        <field name="sequence">46</field>
+        <field name="export_config_id" ref="aeat_mod202_sub01_export_config" />
+        <field name="name">Indicador fin de registro</field>
+        <field name="fixed_value">&lt;/T20201000&gt;</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+</odoo>
